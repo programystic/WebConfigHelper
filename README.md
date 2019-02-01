@@ -1,7 +1,6 @@
 # Web.Config AppSettings Helper
 
 [![DepShield Badge](https://depshield.sonatype.org/badges/programystic/WebConfigHelper/depshield.svg)](https://depshield.github.io)
-
 [![Build status](https://programystic.visualstudio.com/WebConfigHelper/_apis/build/status/WebConfigHelper-.NET%20Desktop-CI)](https://programystic.visualstudio.com/WebConfigHelper/_build/latest?definitionId=11)
 
 This component allows you to get strongly typed appsetting values from the web.config file.
