@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("WebConfigHelper")]
-[assembly: AssemblyDescription("Helper methods to access the web config app settings.")]
+[assembly: AssemblyDescription("Helper methods to access web config app settings.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Programysic")]
+[assembly: AssemblyCompany("Programystic")]
 [assembly: AssemblyProduct("WebConfigHelper")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCopyright("Copyright © 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
