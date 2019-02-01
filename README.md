@@ -19,7 +19,7 @@ var config = new WebConfigValues();
 var appVersion = config.GetAppSetting<int>("appVersion");
 var releaseDate = config.GetAppSetting<DateTime>("releaseDate");
 
-// Return a comma seperated list as an array
+// Return a comma separated list as an array
 var versions = config.GetAppSettingArray<int>("versions");
 var keyDates = config.GetAppSettingArray<DateTime>("keyDates");
 
