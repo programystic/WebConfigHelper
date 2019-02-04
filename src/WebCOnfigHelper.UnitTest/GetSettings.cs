@@ -50,6 +50,69 @@ namespace WebConfigHelper.UnitTest
         }
 
         [Test]
+        public static void GetSettingNullString()
+        {
+            const string expectedValue = "Fred";
+            var helper = GetWebConfigValues(null, null);
+
+            var nullValue = helper.GetAppSetting<string>(ValueOkKey);
+            var defaultValue = helper.GetAppSetting(ValueOkKey, expectedValue);
+
+            Assert.AreEqual(null, nullValue);
+            Assert.AreEqual(expectedValue, defaultValue);
+        }
+
+        [Test]
+        public static void GetSettingNullableDate()
+        {
+            var expectedValue = DateTime.Parse("01/02/2001", CultureInfo.CurrentCulture);
+            var helper = GetWebConfigValues(null, null);
+
+            var nullValue = helper.GetAppSetting<DateTime?>(ValueOkKey);
+            var defaultValue = helper.GetAppSetting<DateTime?>(ValueOkKey, expectedValue);
+
+            Assert.AreEqual(null, nullValue);
+            Assert.AreEqual(expectedValue, defaultValue);
+        }
+
+        [Test]
+        public static void GetSettingNullDate()
+        {
+            var expectedValue = DateTime.Parse("01/02/2001", CultureInfo.CurrentCulture);
+            var helper = GetWebConfigValues(null, null);
+
+            var defaultValue = helper.GetAppSetting(ValueOkKey, expectedValue);
+
+            Assert.Throws<ArgumentNullException>(() => helper.GetAppSetting<DateTime>(ValueOkKey));
+            Assert.AreEqual(expectedValue, defaultValue);
+        }
+
+        [Test]
+        public static void GetSettingNullableInt()
+        {
+            var expectedValue = 12234;
+            var helper = GetWebConfigValues(null, null);
+
+            var nullValue = helper.GetAppSetting<int?>(ValueOkKey);
+            var defaultValue = helper.GetAppSetting<int?>(ValueOkKey, expectedValue);
+
+            Assert.AreEqual(null, nullValue);
+            Assert.AreEqual(expectedValue, defaultValue);
+        }
+
+        [Test]
+        public static void GetSettingNullInt()
+        {
+            var expectedValue = 12234;
+            var helper = GetWebConfigValues(null, null);
+
+            var defaultValue = helper.GetAppSetting(ValueOkKey, expectedValue);
+
+            Assert.Throws<ArgumentNullException>(() => helper.GetAppSetting<int>(ValueOkKey));
+            Assert.AreEqual(expectedValue, defaultValue);
+        }
+
+        [Test]
         public static void GetSettingArrayInt()
         {
             var expectedValue = new int[] { 1, 2, 3, 4 };
@@ -68,9 +131,9 @@ namespace WebConfigHelper.UnitTest
         {
             var expectedValue = new DateTime[]
             {
-                DateTime.Parse("01/01/2000", CultureInfo.InvariantCulture),
-                DateTime.Parse("01/01/2001", CultureInfo.InvariantCulture),
-                DateTime.Parse("01/01/2002", CultureInfo.InvariantCulture)
+                DateTime.Parse("01/01/2000", CultureInfo.CurrentCulture),
+                DateTime.Parse("01/01/2001", CultureInfo.CurrentCulture),
+                DateTime.Parse("01/01/2002", CultureInfo.CurrentCulture)
             };
             var helper = GetWebConfigValues("01/01/2000, 01/01/2001, 01/01/2002", "this is not an array");
 

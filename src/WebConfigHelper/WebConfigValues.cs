@@ -60,12 +60,16 @@ namespace WebConfigHelper
             {
                 settingValue = defaultValue;
             }
+            catch (ArgumentNullException)
+            {
+                settingValue = defaultValue;
+            }
             catch
             {
                 throw;
             }
 
-            return settingValue;
+            return settingValue == null ? defaultValue : settingValue;
         }
 
         public T GetAppSetting<T>(string key)
@@ -73,7 +77,6 @@ namespace WebConfigHelper
             Requires.NotNullOrWhiteSpace(key, nameof(key));
 
             var setting = _webConfigProvider.GetAppSetting(key);
-
             T typedValue = default(T);
 
             try
@@ -82,11 +85,22 @@ namespace WebConfigHelper
             }
             catch (FormatException exception)
             {
-                throw new FormatException(StringFormat.ToInvariant($"Setting ({key}) was not in the correct format. Expected type {typeof(T)}. Setting value = {setting}"), exception);
+                throw new FormatException(StringFormat.ToInvariant($"Setting '{key}' was not in the correct format. Expected type {typeof(T)}. Setting value = {setting}"), exception);
             }
             catch (OverflowException exception)
             {
-                throw new OverflowException(StringFormat.ToInvariant($"Setting ({key}) caused an overflow. Expected type {typeof(T)}. Setting value = {setting}"), exception);
+                throw new OverflowException(StringFormat.ToInvariant($"Setting '{key}' caused an overflow. Expected type {typeof(T)}. Setting value = {setting}"), exception);
+            }
+            catch (InvalidCastException exception)
+            {
+                if (setting == null)
+                {
+                    throw new ArgumentNullException(StringFormat.ToInvariant($"Setting '{key}' returned null and type {typeof(T)} cannot have a null value"), exception);
+                }
+                else
+                {
+                    throw;
+                }
             }
             catch
             {
@@ -98,7 +112,19 @@ namespace WebConfigHelper
 
         private static T ChangeType<T>(string obj)
         {
-            return (T)Convert.ChangeType(obj, typeof(T), CultureInfo.GetCultureInfo("en-GB"));
+            if (obj == null && IsOfNullableType<T>())
+            {
+                return default(T);
+            }
+            else
+            {
+                return (T)Convert.ChangeType(obj, typeof(T), CultureInfo.CurrentCulture);
+            }
+        }
+
+        private static bool IsOfNullableType<T>()
+        {
+            return Nullable.GetUnderlyingType(typeof(T)) != null;
         }
     }
 }
