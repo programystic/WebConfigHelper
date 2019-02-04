@@ -85,17 +85,17 @@ namespace WebConfigHelper
             }
             catch (FormatException exception)
             {
-                throw new FormatException(StringFormat.ToInvariant($"Setting '{key}' was not in the correct format. Expected type {typeof(T)}. Setting value = {setting}"), exception);
+                throw new FormatException(StringFormat.ToInvariant($"Setting '{key}' was not in the correct format. Expected type {typeof(T)}. Setting value = {setting}"));
             }
             catch (OverflowException exception)
             {
-                throw new OverflowException(StringFormat.ToInvariant($"Setting '{key}' caused an overflow. Expected type {typeof(T)}. Setting value = {setting}"), exception);
+                throw new OverflowException(StringFormat.ToInvariant($"Setting '{key}' caused an overflow. Expected type {typeof(T)}. Setting value = {setting}"));
             }
             catch (InvalidCastException exception)
             {
                 if (setting == null)
                 {
-                    throw new ArgumentNullException(StringFormat.ToInvariant($"Setting '{key}' returned null and type {typeof(T)} cannot have a null value"), exception);
+                    throw new ArgumentNullException(StringFormat.ToInvariant($"Setting '{key}' returned null and type {typeof(T)} cannot have a null value"));
                 }
                 else
                 {
