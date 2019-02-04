@@ -83,15 +83,15 @@ namespace WebConfigHelper
             {
                 typedValue = ChangeType<T>(setting);
             }
-            catch (FormatException exception)
+            catch (FormatException)
             {
                 throw new FormatException(StringFormat.ToInvariant($"Setting '{key}' was not in the correct format. Expected type {typeof(T)}. Setting value = {setting}"));
             }
-            catch (OverflowException exception)
+            catch (OverflowException)
             {
                 throw new OverflowException(StringFormat.ToInvariant($"Setting '{key}' caused an overflow. Expected type {typeof(T)}. Setting value = {setting}"));
             }
-            catch (InvalidCastException exception)
+            catch (InvalidCastException)
             {
                 if (setting == null)
                 {
