@@ -10,8 +10,10 @@ This component allows you to get strongly typed appsetting values from the web.c
 <appSettings>
     <add key="appVersion" value="15" />    
     <add key="releaseDate" value="01/02/2019" />
+    <add key="appName" value="TheGreatestApp" />
     <add key="versions" value="1, 9, 15, 23" />
     <add key="keyDates" value="01/02/2019, 01/03/2019, 01/04/2019" />
+    <add key="names" value="Fred, Sarah, Sam" />
 </appSettings>
 ```
 
@@ -21,10 +23,12 @@ var config = new WebConfigValues();
 
 var appVersion = config.GetAppSetting<int>("appVersion");
 var releaseDate = config.GetAppSetting<DateTime>("releaseDate");
+var appName = config.GetAppSetting<string>("appName");
 
 // Return a comma separated list as an array
 var versions = config.GetAppSettingArray<int>("versions");
 var keyDates = config.GetAppSettingArray<DateTime>("keyDates");
+var names = config.GetAppSettingArray<string>("names");
 
 // with a default value
 var appVersion = config.GetAppSetting("appVersion", 1);
@@ -36,13 +40,13 @@ var keyDates = config.GetAppSettingArray("keyDates", new int[] {  DateTime.Parse
 ## Handling null values
 ```cs
 // Either use a default value
-var appVersion = config.GetAppSetting("timeout", 30);
+var timeout = config.GetAppSetting("timeout", 30);
 
 // or use a nullable type
-var appVersion = config.GetAppSetting<int?>("timeout");
+var timeout = config.GetAppSetting<int?>("timeout");
 
 // otherwise it will fail
-var appVersion = config.GetAppSetting<int>("timeout");
+var timeout = config.GetAppSetting<int>("timeout");
 // System.ArgumentNullException : Setting 'timeout' returned null and type System.Int32 cannot have a null value
 ```
 

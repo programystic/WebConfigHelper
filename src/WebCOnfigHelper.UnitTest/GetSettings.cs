@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System;
 using System.Globalization;
+using System.Threading;
 
 [assembly: CLSCompliant(true)]
 namespace WebConfigHelper.UnitTest
@@ -33,8 +34,26 @@ namespace WebConfigHelper.UnitTest
             TestSetting(false, "False", "not a bool");
         }
 
-        [Test]
+        [Test]        
         public static void GetSettingDateTime()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+
+            TestSetting(new DateTime(2000, 12, 31, 12, 12, 12), "31/12/2000 12:12:12", "not a date time");
+            TestSetting(new DateTime(2000, 12, 31), "31/12/2000 00:00:00", "not a date time");
+        }
+
+        [Test]
+        public static void GetSettingUsaDateTime()
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+
+            TestSetting(new DateTime(2000, 12, 31, 12, 12, 12), "12/31/2000 12:12:12", "not a date time");
+            TestSetting(new DateTime(2000, 12, 31), "12/31/2000 00:00:00", "not a date time");
+        }
+
+        [Test]
+        public static void GetSettingUsaDateTime2()
         {
             TestSetting(new DateTime(2000, 12, 31, 12, 12, 12), "31/12/2000 12:12:12", "not a date time");
             TestSetting(new DateTime(2000, 12, 31), "31/12/2000 00:00:00", "not a date time");
