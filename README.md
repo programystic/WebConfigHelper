@@ -1,21 +1,10 @@
 # Web.Config AppSettings Helper
 
-[![DepShield Badge](https://depshield.sonatype.org/badges/programystic/WebConfigHelper/depshield.svg)](https://depshield.github.io)
 [![Build status](https://programystic.visualstudio.com/WebConfigHelper/_apis/build/status/WebConfigHelper-.NET%20Desktop-CI)](https://programystic.visualstudio.com/WebConfigHelper/_build/latest?definitionId=11)
 
-This component allows you to get strongly typed appsetting values from the web.config file.
+[![NuGet package](https://img.shields.io/nuget/v/WebConfigHelper.svg)](https://nuget.org/packages/WebConfigHelper)
 
-## Example web.config app settings
-```xml
-<appSettings>
-    <add key="appVersion" value="15" />    
-    <add key="releaseDate" value="01/02/2019" />
-    <add key="appName" value="TheGreatestApp" />
-    <add key="versions" value="1, 9, 15, 23" />
-    <add key="keyDates" value="01/02/2019, 01/03/2019, 01/04/2019" />
-    <add key="names" value="Fred, Sarah, Sam" />
-</appSettings>
-```
+WebConfigHelper allows you to get strongly typed appsetting values from the web.config file.
 
 ## Getting a setting:
 ```cs
@@ -26,6 +15,9 @@ var releaseDate = config.GetAppSetting<DateTime>("releaseDate");
 var appName = config.GetAppSetting<string>("appName");
 
 // Return a comma separated list as an array
+// <add key="versions" value="1, 9, 15, 23" />
+// <add key="keyDates" value="01/02/2019, 01/03/2019, 01/04/2019" />
+// <add key="names" value="Fred, Sarah, Sam" />
 var versions = config.GetAppSettingArray<int>("versions");
 var keyDates = config.GetAppSettingArray<DateTime>("keyDates");
 var names = config.GetAppSettingArray<string>("names");
