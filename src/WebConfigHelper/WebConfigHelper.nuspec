@@ -7,8 +7,9 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <projectUrl>https://github.com/programystic/WebConfigHelper</projectUrl>
+    <iconUrl>https://programystic.blob.core.windows.net/images/cog.png</iconUrl>
     <license type="expression">MIT</license>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>    
     <copyright>Copyright 2019</copyright>
     <tags>webconfig appsetting helper</tags>
