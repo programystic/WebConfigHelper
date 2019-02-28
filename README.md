@@ -49,7 +49,7 @@ When you are creating unit tests for your web application, you can mock IWebConf
 var provider = new Mock<IWebConfigProvider>();
 // GetAppSetting always returns a string value
 provider.Setup(x => x.GetAppSetting("appVersion")).Returns("1");
-provider.Setup(x => x.GetAppSetting(versions)).Returns("1, 9, 15, 23");
+provider.Setup(x => x.GetAppSetting("versions")).Returns("1, 9, 15, 23");
 
 var config = new WebConfigValues(provider.Object);
 var appVersion = config.GetAppSetting<int>("appVersion");
